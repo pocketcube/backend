@@ -3,8 +3,9 @@ import pika
 import json
 from time import sleep
 
+credentials = pika.PlainCredentials('test', 'test')
 connection = pika.BlockingConnection(
-    pika.ConnectionParameters(host='localhost'))
+    pika.ConnectionParameters(host='localhost', credentials=credentials))
 channel = connection.channel()
 
 while True:

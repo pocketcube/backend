@@ -2,3 +2,6 @@ Flask-MQTT
 Flask
 eventlet
 Flask-SocketIO
+pika
+requests
+python-socketio

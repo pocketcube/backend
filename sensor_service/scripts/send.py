@@ -34,11 +34,11 @@ while True:
     )
     sleep(.4)
     
-    gps = { 'lat': '-20.0000','lon': '-20.0000' }
+    pressure = { 'pressure': '30' }
     channel.basic_publish(
         exchange='amq.topic',
-        routing_key='sensor.gps',
-        body=gps
+        routing_key='sensor.pressure',
+        body=pressure
     )
     sleep(.4)
 

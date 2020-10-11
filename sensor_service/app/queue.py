@@ -12,5 +12,8 @@ def handle_mqtt_message(client, userdata, message):
 
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
-    mqtt.subscribe('#')
+    mqtt.subscribe('sensor/temperature')
+    mqtt.subscribe('sensor/oxygen')
+    mqtt.subscribe('sensor/gps')
+
     print('subscribed')

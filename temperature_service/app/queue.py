@@ -13,5 +13,4 @@ def handle_mqtt_message(client, userdata, message):
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
     mqtt.subscribe('#')
-    mqtt.publish(topic="sensor/temperature", payload="22")
     print('subscribed')

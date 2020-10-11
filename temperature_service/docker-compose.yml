@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:3
+    command: "/bin/bash -c \"rabbitmq-plugins enable rabbitmq_mqtt; rabbitmq-server; rabbitmq_management\""
+    ports:
+      - 1883:1883
+      - 8080:15672
+      - 5672:5672
+    volumes:
+      - "./rabbitmq:/etc/rabbitmq"
+    environment:
+      - RABBITMQ_DEFAULT_USER=mqadmin
+      - RABBITMQ_DEFAULT_PASS=Admin123XX_
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "5672" ]
+      interval: 5s
+      timeout: 15s
+      retries: 1
+
+  server:
+    build: .
+    volumes:
+      - '.:/server'
+    environment:
+      FLASK_DEBUG: 1
+      FLASK_ENV: development
+    ports:
+      - '5000:5000'
+    # entrypoint:
+    #   - flask
+    #   - run
+    #   - --host=0.0.0.0
+    restart: on-failure
+    depends_on:
+      - rabbit
+

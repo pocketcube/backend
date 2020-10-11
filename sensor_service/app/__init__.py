@@ -9,9 +9,9 @@ app.config['MQTT_BROKER_URL'] = 'rabbit'
 app.config['MQTT_BROKER_PORT'] = 1883
 app.config['MQTT_KEEPALIVE'] = 100
 app.config['MQTT_TLS_ENABLED'] = False
-app.config['MQTT_CLIENT_ID'] = 'test'
-app.config['MQTT_USERNAME'] = 'test'
-app.config['MQTT_PASSWORD'] = 'test'
+app.config['MQTT_CLIENT_ID'] = 'user'
+app.config['MQTT_USERNAME'] = 'user'
+app.config['MQTT_PASSWORD'] = 'user'
 
 mqtt = Mqtt(app)
 socketio = SocketIO(app)

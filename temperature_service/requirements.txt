@@ -1,0 +1,4 @@
+Flask-MQTT
+Flask
+eventlet
+Flask-SocketIO

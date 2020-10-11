@@ -1,9 +1,6 @@
-import eventlet
 from flask import Flask
 from flask_socketio import SocketIO
 from flask_mqtt import Mqtt
-
-eventlet.monkey_patch()
 
 app = Flask(__name__)
 app.config['SECRET'] = 'my secret key'

@@ -10,40 +10,36 @@ connection = pika.BlockingConnection(
 channel = connection.channel()
 
 while True:
-    print({
-                                'temp': round(random.uniform(20.1, 21.3), 2),
-                              })
-    channel.basic_publish(exchange='amq.topic',
-                          routing_key='sensor.temperature',
-                          body=json.dumps(
-                              {
-                                'temp': round(random.uniform(20.1, 21.3), 2),
-                              }
-                          ))
+    temp = {'temp': round(random.uniform(20.1, 21.3), 2)} 
+    channel.basic_publish(
+        exchange='amq.topic',
+        routing_key='sensor.temperature',
+        body=json.dumps(temp)
+    )
     sleep(.1)
-    print({
-                                'oxygen': '89',
-                            })
-    channel.basic_publish(exchange='amq.topic',
-                        routing_key='sensor.oxygen',
-                        body=json.dumps(
-                            {
-                                'oxygen': '89',
-                            }
-                        ))
+    
+    oxygen = {'oxygen': '89'}
+    channel.basic_publish(
+        exchange='amq.topic',
+        routing_key='sensor.oxygen',
+        body=json.dumps(oxygen)
+    )
     sleep(.3)
-    print({
-                                'lat': '-20.0000',
-                                'lon': '-20.0000'
-                            })
-    channel.basic_publish(exchange='amq.topic',
-                        routing_key='sensor.gps',
-                        body=json.dumps(
-                            {
-                                'lat': '-20.0000',
-                                'lon': '-20.0000'
-                            }
-                        ))
+
+    gps = { 'lat': '-20.0000','lon': '-20.0000' }
+    channel.basic_publish(
+        exchange='amq.topic',
+        routing_key='sensor.gps',
+        body=gps
+    )
+    sleep(.4)
+    
+    gps = { 'lat': '-20.0000','lon': '-20.0000' }
+    channel.basic_publish(
+        exchange='amq.topic',
+        routing_key='sensor.gps',
+        body=gps
+    )
     sleep(.4)
 
 connection.close()

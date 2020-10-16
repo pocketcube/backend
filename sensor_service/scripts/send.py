@@ -10,8 +10,9 @@ connection = pika.BlockingConnection(
 channel = connection.channel()
 
 while True:
+    
+    # Dados de temperatura
     temp = {'temp': round(random.uniform(20.1, 21.3), 2)}
-
     print(temp) 
     channel.basic_publish(
         exchange='amq.topic',
@@ -20,8 +21,9 @@ while True:
     )
     sleep(.1)
     
-    print(oxygen)
+    # Dados de oxigênio
     oxygen = {'oxygen': '89'}
+    print(oxygen)
     channel.basic_publish(
         exchange='amq.topic',
         routing_key='sensor.oxygen',
@@ -29,8 +31,9 @@ while True:
     )
     sleep(.3)
 
-    print(gps)
+    # Dados de GPS
     gps = { 'lat': '-20.0000','lon': '-20.0000' }
+    print(gps)
     channel.basic_publish(
         exchange='amq.topic',
         routing_key='sensor.gps',
@@ -38,8 +41,9 @@ while True:
     )
     sleep(.4)
     
-    print(pressure)
+    # Dados de pressão
     pressure = { 'pressure': '30' }
+    print(pressure)
     channel.basic_publish(
         exchange='amq.topic',
         routing_key='sensor.pressure',

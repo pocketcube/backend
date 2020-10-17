@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:3
+    build: 
+      context: '.'
+      dockerfile: './rabbit.Dockerfile'
+    ports:
+      - 1883:1883
+      - 8080:15672
+      - 5672:5672
+    volumes:
+      - "./rabbitmq:/etc/rabbitmq"
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "5672" ]
+      interval: 5s
+      timeout: 15s
+      retries: 1
+
+  server:
+    build: 
+      context: '.'
+      dockerfile: './service.Dockerfile'
+    volumes:
+      - '.:/server'
+    environment:
+      FLASK_DEBUG: 1
+      FLASK_ENV: development
+    ports:
+      - '5000:5000'
+    restart: on-failure
+    depends_on:
+      - rabbit

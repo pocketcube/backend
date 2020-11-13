@@ -5,3 +5,5 @@ Flask-SocketIO
 pika
 requests
 python-socketio
+Flask-SQLAlchemy
+pandas

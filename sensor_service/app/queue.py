@@ -1,7 +1,6 @@
 from app import mqtt
 from app import socketio
-from app import db, SensorData
-from datetime import datetime
+from app.db import save_data
 
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
@@ -9,9 +8,7 @@ def handle_mqtt_message(client, userdata, message):
         topic=message.topic,
         payload=message.payload.decode()
     )
-    sensor_data = SensorData(sensor_name=message.topic, timestamp=datetime.now(), sensor_value=message.payload.decode() )
-    db.session.add(sensor_data)
-    db.session.commit()
+    save_data(message.topic, message.payload.decode())
     socketio.emit('mqtt_message', data=data)
 
 @mqtt.on_connect()
